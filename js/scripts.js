@@ -23,7 +23,7 @@ function isCCNumberValid(number) {
   const ccArray = (number.toString().split("")).reverse();
 
   const arrayWithDoubledEven = ccArray.map(function (digit, index) {
-    if (index % 2 !== 0) {
+    if (index % 2 !== 0) { 
       return digit * 2;
     } else {
       return digit;
@@ -52,24 +52,24 @@ function isCCNumberValid(number) {
 
 function firstDigitsValid(number) {
   const cardNumberString = number.toString();
-  const validVisa = cardNumberString.includes(4, 0);
-  const validMC = cardNumberString.includes(5, 0);
-  const validDisc = cardNumberString.includes(6, 0);
+  const validVisa = cardNumberString.charAt();
+  const validMC = cardNumberString.charAt();
+  const validDisc = cardNumberString.charAt();
   const validAmEx = cardNumberString.substring(0, 2);
 
   let cardCompany = '';
 
-  if (validVisa) {
+  if (validVisa === '4') {
     cardCompany = 'Visa';
-  } else if (validMC) {
+  } else if (validMC === '5') {
     cardCompany = 'Mastercard';
-  } else if (validDisc) {
+  } else if (validDisc === '6') {
     cardCompany = 'Discover'
-  } else if (validAmEx) {
+  } else if (validAmEx === '34' || '36') {
     cardCompany = 'American Express'
   } else {
     cardCompany = 'invalid'
   }
-
+  return cardCompany;
 
 }
