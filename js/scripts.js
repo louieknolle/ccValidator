@@ -57,7 +57,7 @@ function firstDigitsValid(number) {
   const validDisc = cardNumberString.includes(6, 0);
   const validAmEx = cardNumberString.substring(0, 2);
 
-  let cardCompany = '';
+  // let cardCompany = '';
 
   if (validVisa) {
     cardCompany = 'Visa';
@@ -71,5 +71,5 @@ function firstDigitsValid(number) {
     cardCompany = 'invalid'
   }
 
-  
+
 }
