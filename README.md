@@ -34,3 +34,20 @@ Code: (number.toString().split("")).reverse();
 Output: [1,2,3,4] -> [4,3,2,1]
 
 
+
+Describe firstDigitsValid()
+Test: "It will determine that a card is a valid Visa if the first digit is a 4."
+Code: if (number.includes(4 , 0)) {//return Valid Visa}
+Output: 'Your Visa is valid."
+
+Test: "It will determine that a card is a valid Mastercard if the first digit is a 5."
+Code: if (number.includes(5, 0)) {//return Valid Mastercard}
+Output: 'Your Mastercard is valid."
+
+Test: "It will determine that a card is a valid Discover if the first digit is a 6."
+Code: if (number.include(6,0)) {//return Valid discover}
+Output: 'Your Discover is valid."
+
+Test: "It will determine that a card is a valid AmEx if the first two digits are 34 or 37."
+Code: if (number.substring(0,2)) {//return Valid AmEx}
+Output: 'Your AmEx is valid."
