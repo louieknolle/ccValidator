@@ -1,25 +1,35 @@
 $(document).ready(function() {
+
   
 });
+function firstDigitsLengthValid(number) {
+  const cardNumberString = number.toString();
+  const validVisa = cardNumberString.charAt();
+  const validMC = cardNumberString.charAt();
+  const validDisc = cardNumberString.charAt();
+  const validAmEx = cardNumberString.substring(0, 2);
 
-// function valid(number) {
-//   let splitNumber = parseInt(number.toString().split(""));
-//   let totalEvenValue = 0;
-//   let totalOddValue = 0;
-// for(let i = 0; i < splitNumber.length; i++) {
-// if(i % 2 === 0) {
-//   if(splitNumber[i] * 2 >= 10) {
-//     totalEvenValue += splitNumber[i] * 2 - 9;
-//   } else {
-// totalEvenValue += splitNumber[i] * 2;
-//   }
-// } else {
-//   totalOddValue += splitNumber[i];
-// }
-// }
-// return ((totalEvenValue = totalOddValue) %10 === 0)
-// }
+  let cardCompany = '';
+
+  if (validVisa === '4' && cardNumberString.length === 16) {
+    cardCompany = 'Visa';
+  } else if (validMC === '5' && cardNumberString.length === 16) {
+    cardCompany = 'Mastercard';
+  } else if (validDisc === '6' && cardNumberString.length === 16) {
+    cardCompany = 'Discover'
+  } else if ((validAmEx === '34' || validAmEx === '36') && cardNumberString.length === 15) {
+    cardCompany = 'American Express'
+  } else {
+    cardCompany = 'invalid'
+  }
+  return cardCompany;
+}
+
 function isCCNumberValid(number) {
+  if (!firstDigitsLengthValid(number)) {
+    return '';
+  }
+
   const ccArray = (number.toString().split("")).reverse();
 
   const arrayWithDoubledEven = ccArray.map(function (digit, index) {
@@ -44,13 +54,15 @@ function isCCNumberValid(number) {
   }
 
   if (sum % 10 === 0) {
-    return true;
+    return console.log(`Your ${cardCompany} card is valid.`);
+    
   } else {
-    return false;
+    return console.log('Not a valid credit card.');
+    
   }
 }
 
-function firstDigitsValid(number) {
+function firstDigitsLengthValid(number) {
   const cardNumberString = number.toString();
   const validVisa = cardNumberString.charAt();
   const validMC = cardNumberString.charAt();
@@ -59,17 +71,16 @@ function firstDigitsValid(number) {
 
   let cardCompany = '';
 
-  if (validVisa === '4') {
+  if (validVisa === '4' && cardNumberString.length === 16) {
     cardCompany = 'Visa';
-  } else if (validMC === '5') {
+  } else if (validMC === '5' && cardNumberString.length === 16) {
     cardCompany = 'Mastercard';
-  } else if (validDisc === '6') {
+  } else if (validDisc === '6' && cardNumberString.length === 16) {
     cardCompany = 'Discover'
-  } else if (validAmEx === '34' || '36') {
+  } else if ((validAmEx === '34' || validAmEx === '36') && cardNumberString.length === 15) {
     cardCompany = 'American Express'
   } else {
     cardCompany = 'invalid'
   }
   return cardCompany;
-
 }
