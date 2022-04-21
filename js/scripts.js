@@ -1,8 +1,4 @@
-$(document).ready(function() {
-
-  
-});
-function firstDigitsLengthValid(number) {
+function getCompanyFromNumber(number) {
   const cardNumberString = number.toString();
   const validVisa = cardNumberString.charAt();
   const validMC = cardNumberString.charAt();
@@ -17,7 +13,7 @@ function firstDigitsLengthValid(number) {
     cardCompany = 'Mastercard';
   } else if (validDisc === '6' && cardNumberString.length === 16) {
     cardCompany = 'Discover'
-  } else if ((validAmEx === '34' || validAmEx === '36') && cardNumberString.length === 15) {
+  } else if ((validAmEx === '34' || validAmEx === '37') && cardNumberString.length === 15) {
     cardCompany = 'American Express'
   } else {
     cardCompany = 'invalid'
@@ -26,10 +22,6 @@ function firstDigitsLengthValid(number) {
 }
 
 function isCCNumberValid(number) {
-  if (!firstDigitsLengthValid(number)) {
-    return '';
-  }
-
   const ccArray = (number.toString().split("")).reverse();
 
   const arrayWithDoubledEven = ccArray.map(function (digit, index) {
@@ -53,34 +45,24 @@ function isCCNumberValid(number) {
     sum += parseInt(arrayDoubleDigitsAdded[i]);
   }
 
-  if (sum % 10 === 0) {
-    return console.log(`Your ${cardCompany} card is valid.`);
+  if (sum % 10 === 0 && sum > 0) {
+  	const cardCompany = getCompanyFromNumber(number);
+    return (`Your ${cardCompany} card is valid.`);
     
   } else {
-    return console.log('Not a valid credit card.');
+    return ('Not a valid credit card.');
     
   }
 }
 
-function firstDigitsLengthValid(number) {
-  const cardNumberString = number.toString();
-  const validVisa = cardNumberString.charAt();
-  const validMC = cardNumberString.charAt();
-  const validDisc = cardNumberString.charAt();
-  const validAmEx = cardNumberString.substring(0, 2);
+$(document).ready(function() {
+  $('form#numberform').submit(function(event) {
+    event.preventDefault();
+    const userCCNumber = $('#ccNumber').val();
+    const companyFromNumber = getCompanyFromNumber(userCCNumber);
+    const isNumberValid = isCCNumberValid(userCCNumber);
 
-  let cardCompany = '';
-
-  if (validVisa === '4' && cardNumberString.length === 16) {
-    cardCompany = 'Visa';
-  } else if (validMC === '5' && cardNumberString.length === 16) {
-    cardCompany = 'Mastercard';
-  } else if (validDisc === '6' && cardNumberString.length === 16) {
-    cardCompany = 'Discover'
-  } else if ((validAmEx === '34' || validAmEx === '36') && cardNumberString.length === 15) {
-    cardCompany = 'American Express'
-  } else {
-    cardCompany = 'invalid'
-  }
-  return cardCompany;
-}
+    $('#result').html(isNumberValid);
+  })
+  
+});
